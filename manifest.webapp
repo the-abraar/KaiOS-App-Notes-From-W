@@ -1,0 +1,16 @@
+{
+  "name": "Notes From Waifu",
+  "description": "Random waifu quotes generator",
+  "launch_path": "/index.html",
+  "icons": {
+    "56": "/icons/icon56.png",
+    "112": "/icons/icon112.png"
+  },
+  "developer": {
+    "name": "Abraar",
+    "url": "http://localhost"
+  },
+  "default_locale": "en",
+  "type": "web",
+  "fullscreen": "true"
+}
