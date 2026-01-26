@@ -36,10 +36,24 @@ function updateContent() {
     quoteElement.innerText = `"${quotes[randomQuoteIndex]}"`;
 }
 
-// Handle Keypad Input (Center key 'Enter' to refresh)
 document.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-        updateContent();
+    switch(e.key) {
+        case 'Enter': // Center Key on Phone / Enter on Mac
+            updateContent();
+            break;
+        case 'ArrowUp':
+        case 'ArrowDown':
+        case 'ArrowLeft':
+        case 'ArrowRight':
+            // These keys work on both Mac and KaiOS D-Pad automatically
+            console.log("Direction key pressed");
+            break;
+        case 'SoftLeft': // The top-left button on the phone
+            console.log("Left option pressed");
+            break;
+        case 'SoftRight': // The top-right button on the phone
+            console.log("Right option pressed");
+            break;
     }
 });
 
