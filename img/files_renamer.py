@@ -81,7 +81,7 @@ def batch_rename_jpgs(directory_path: str):
 if __name__ == "__main__":
     
     # On Mac, you can drag the folder into the terminal to get the path
-    target_folder = "/Users/blackbird/DEV/GitRepos/KaiOS-App-Notes-From-W/img" 
+    target_folder = "." 
     
     # Safety check to prevent running on an example path
     if os.path.exists(target_folder):
