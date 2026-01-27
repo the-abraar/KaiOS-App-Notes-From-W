@@ -23,7 +23,7 @@ def batch_rename_jpgs(directory_path: str):
     all_files = os.listdir(directory_path)
     jpg_files = [
         f for f in all_files 
-        if f.lower().endswith(('.jpg', '.jpeg')) and not f.startswith('.')
+        if f.lower().endswith(('.jpg', '.jpeg', 'webp')) and not f.startswith('.')
     ]
 
     if not jpg_files:
