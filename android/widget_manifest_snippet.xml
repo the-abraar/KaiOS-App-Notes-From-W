@@ -1,0 +1,22 @@
+<!-- ADD THESE PERMISSIONS inside <manifest>, before <application> -->
+<!--
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
+<uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+<uses-permission android:name="android.permission.WAKE_LOCK"/>
+-->
+
+<!-- ADD THIS inside <application>, after the <activity> block -->
+<!--
+<receiver
+    android:name=".QuoteWidgetProvider"
+    android:exported="true">
+    <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+    </intent-filter>
+    <meta-data
+        android:name="android.appwidget.provider"
+        android:resource="@xml/widget_quote_info" />
+</receiver>
+-->
