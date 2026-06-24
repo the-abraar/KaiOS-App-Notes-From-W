@@ -66,6 +66,7 @@ The Flutter app owns all business logic. Native widgets are read-only display sh
 - Fetches batches of 10 quotes, stores in local `sqflite` cache
 - Widget refresh always pulls from cache — no live network call at refresh time
 - Cache refreshes opportunistically when app is foregrounded
+- **First launch / empty cache:** falls back to bundled `quotes.json` immediately — no empty state
 
 ### ImageService
 - **Bundled:** 33 images from the KaiOS `img/` folder, resized to max 1080px, included as Flutter assets
@@ -104,6 +105,8 @@ Writes a single JSON blob to shared storage:
 - **Large:** Image + full quote + author + app name watermark
 
 Widget tap → deep links to Flutter app main screen.
+
+**First widget render (before any refresh has run):** shows a random bundled image + a quote from `quotes.json`. Never blank.
 
 ---
 
