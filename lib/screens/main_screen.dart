@@ -57,7 +57,16 @@ class _MainScreenState extends State<MainScreen> {
         _loading = false;
       });
     } catch (e) {
-      setState(() => _loading = false);
+      // Fallback: load a bundled quote so screen is never blank
+      try {
+        final fallback = await _quoteService.getRandomQuote(QuoteStyle.both);
+        setState(() {
+          _quote = fallback;
+          _loading = false;
+        });
+      } catch (_) {
+        setState(() => _loading = false);
+      }
     }
   }
 

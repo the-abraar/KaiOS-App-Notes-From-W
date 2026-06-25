@@ -15,8 +15,13 @@ class ImageService {
   Future<String> getSharedImagesDir() async {
     if (_testSharedDir != null) return _testSharedDir!;
     if (Platform.isAndroid) {
-      final dir = await getExternalStorageDirectory();
-      final path = '${dir!.path}/images';
+      // getExternalStorageDirectory() can return null — fall back to app docs dir
+      Directory? extDir;
+      try {
+        extDir = await getExternalStorageDirectory();
+      } catch (_) {}
+      final base = extDir ?? await getApplicationDocumentsDirectory();
+      final path = '${base.path}/images';
       await Directory(path).create(recursive: true);
       return path;
     } else {
@@ -28,22 +33,30 @@ class ImageService {
   }
 
   Future<void> initBundledImages() async {
-    final sharedDir = await getSharedImagesDir();
-    for (var i = 1; i <= _bundledCount; i++) {
-      final dest = File('$sharedDir/bundled_$i.jpg');
-      if (!dest.existsSync()) {
-        final data = await rootBundle.load('assets/images/$i.jpg');
-        await dest.writeAsBytes(data.buffer.asUint8List());
+    try {
+      final sharedDir = await getSharedImagesDir();
+      for (var i = 1; i <= _bundledCount; i++) {
+        final dest = File('$sharedDir/bundled_$i.jpg');
+        if (!dest.existsSync()) {
+          final data = await rootBundle.load('assets/images/$i.jpg');
+          await dest.writeAsBytes(data.buffer.asUint8List());
+        }
       }
+    } catch (e) {
+      // Non-fatal: app still works, images will be extracted on next launch
     }
   }
 
   Future<List<String>> _getBundledPaths() async {
-    final sharedDir = await getSharedImagesDir();
-    return List.generate(
-      _bundledCount,
-      (i) => '$sharedDir/bundled_${i + 1}.jpg',
-    ).where((p) => File(p).existsSync()).toList();
+    try {
+      final sharedDir = await getSharedImagesDir();
+      return List.generate(
+        _bundledCount,
+        (i) => '$sharedDir/bundled_${i + 1}.jpg',
+      ).where((p) => File(p).existsSync()).toList();
+    } catch (_) {
+      return [];
+    }
   }
 
   Future<String> getRandomImagePath(List<String> userPaths) async {
