@@ -5,7 +5,7 @@ import '../repositories/widget_data_repository.dart';
 import 'image_service.dart';
 import 'quote_service.dart';
 
-const _taskName = 'com.inovacetech.quotewidget.refresh';
+const _taskName = 'com.the_abraar.quote_widget_app.refresh';
 
 @pragma('vm:entry-point')
 void callbackDispatcher() {

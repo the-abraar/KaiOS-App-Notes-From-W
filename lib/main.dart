@@ -7,14 +7,18 @@ import 'screens/main_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await HomeWidget.setAppGroupId('group.com.inovacetech.quotewidget');
-  await RefreshScheduler.init();
-
-  // Extract bundled images to shared dir on first run
-  await ImageService().initBundledImages();
-
-  // Schedule default refresh if not yet scheduled
-  await RefreshScheduler.schedule(30);
+  try {
+    await HomeWidget.setAppGroupId('group.com.the_abraar.quote_widget_app');
+  } catch (_) {}
+  try {
+    await RefreshScheduler.init();
+  } catch (_) {}
+  try {
+    await ImageService().initBundledImages();
+  } catch (_) {}
+  try {
+    await RefreshScheduler.schedule(30);
+  } catch (_) {}
 
   runApp(const QuoteWidgetApp());
 }

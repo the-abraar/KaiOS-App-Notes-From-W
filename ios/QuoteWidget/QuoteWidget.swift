@@ -14,7 +14,7 @@ struct WidgetData {
 
     static func load() -> WidgetData {
         guard
-            let defaults = UserDefaults(suiteName: "group.com.inovacetech.quotewidget"),
+            let defaults = UserDefaults(suiteName: "group.com.the_abraar.quote_widget_app"),
             let raw = defaults.string(forKey: "widget_data"),
             let data = raw.data(using: .utf8),
             let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
@@ -45,7 +45,7 @@ struct QuoteProvider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<QuoteEntry>) -> Void) {
         let data = WidgetData.load()
         let entry = QuoteEntry(date: .now, data: data)
-        let defaults = UserDefaults(suiteName: "group.com.inovacetech.quotewidget")
+        let defaults = UserDefaults(suiteName: "group.com.the_abraar.quote_widget_app")
         let interval = defaults?.integer(forKey: "refresh_interval_minutes") ?? 30
         let next = Calendar.current.date(byAdding: .minute, value: interval, to: .now)!
         completion(Timeline(entries: [entry], policy: .after(next)))

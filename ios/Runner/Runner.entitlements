@@ -4,7 +4,7 @@
 <dict>
     <key>com.apple.security.application-groups</key>
     <array>
-        <string>group.com.inovacetech.quotewidget</string>
+        <string>group.com.the_abraar.quote_widget_app</string>
     </array>
 </dict>
 </plist>

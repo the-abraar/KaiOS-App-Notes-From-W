@@ -1,4 +1,4 @@
-package com.inovacetech.quotewidget
+package com.the_abraar.quote_widget_app
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
