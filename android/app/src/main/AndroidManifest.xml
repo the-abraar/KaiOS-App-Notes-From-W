@@ -46,6 +46,14 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_quote_info" />
         </receiver>
+
+        <receiver
+            android:name=".ScreenUnlockReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

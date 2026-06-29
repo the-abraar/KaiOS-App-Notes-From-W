@@ -19,6 +19,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   int _intervalMinutes = 30;
   QuoteStyle _quoteStyle = QuoteStyle.both;
   List<String> _userImagePaths = [];
+  bool _unlockRefresh = false;
   bool _loading = true;
 
   @override
@@ -36,6 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         orElse: () => QuoteStyle.both,
       );
       _userImagePaths = prefs.getStringList('user_image_paths') ?? [];
+      _unlockRefresh = prefs.getBool('unlock_refresh_enabled') ?? false;
       _loading = false;
     });
   }
@@ -45,6 +47,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     await prefs.setInt('refresh_interval_minutes', _intervalMinutes);
     await prefs.setString('quote_style', _quoteStyle.name);
     await prefs.setStringList('user_image_paths', _userImagePaths);
+    await prefs.setBool('unlock_refresh_enabled', _unlockRefresh);
     await RefreshScheduler.schedule(_intervalMinutes);
   }
 
@@ -105,6 +108,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         await _save();
                       },
                     )),
+                const Divider(color: Colors.white24),
+                _SectionLabel('Widget'),
+                SwitchListTile(
+                  title: const Text('Refresh photo on every unlock',
+                      style: TextStyle(color: Colors.white)),
+                  subtitle: const Text(
+                      'Shows a new photo each time you unlock your phone',
+                      style: TextStyle(color: Colors.white54)),
+                  value: _unlockRefresh,
+                  activeColor: Colors.white,
+                  onChanged: (v) async {
+                    setState(() => _unlockRefresh = v);
+                    await _save();
+                  },
+                ),
                 const Divider(color: Colors.white24),
                 _SectionLabel('Images'),
                 ListTile(

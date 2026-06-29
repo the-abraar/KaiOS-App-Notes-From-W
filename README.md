@@ -56,7 +56,7 @@ flutter run
 Things coming next — see [`CONTRIBUTING.md`](CONTRIBUTING.md) if you want to help build any of these.
 
 ### Near term
-- [ ] **Refresh on every unlock** — optional toggle to show a new photo each time the screen turns on, not just on a timer
+- [x] **Refresh on every unlock** — Android: shows a new photo each time you unlock, with a Settings toggle to turn it on/off
 - [ ] **Favourite photos** — mark certain photos to appear more often
 - [ ] **Quote editor** — write your own quotes that only you two will ever see
 - [ ] **Widget themes** — gradient colours, font choices, dark/light scrim intensity

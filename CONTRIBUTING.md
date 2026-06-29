@@ -14,11 +14,8 @@ Glimps should feel **quiet and warm**. Every feature should pass this test: *doe
 
 These are well-scoped, self-contained, and would make the app meaningfully better:
 
-### Refresh on screen unlock
-When the phone screen turns on, show a new photo (optional toggle, off by default).
-- **Android:** register a `BroadcastReceiver` for `ACTION_USER_PRESENT` (unlock) or `ACTION_SCREEN_ON`
-- **iOS:** WidgetKit doesn't expose unlock events directly — the workaround is setting a very short timeline refresh interval (e.g. 1 minute) when this mode is active
-- Settings toggle: *"Change photo on every unlock"*
+### ~~Refresh on screen unlock~~ ✅ Done
+Android: `ScreenUnlockReceiver` listens for `ACTION_USER_PRESENT` and swaps the widget image each unlock. Toggle in Settings → Widget. iOS still pending (WidgetKit doesn't expose unlock events — workaround is a short timeline refresh interval when active).
 
 ### Favourite photos
 A heart icon overlay on the main screen. Favourited photos appear 3× more often in the random pool.
@@ -70,7 +67,8 @@ lib/
 
 android/app/src/main/kotlin/com/the_abraar/quote_widget_app/
 ├── MainActivity.kt
-└── QuoteWidgetProvider.kt             # Android widget renderer
+├── QuoteWidgetProvider.kt             # Android widget renderer
+└── ScreenUnlockReceiver.kt            # Swaps widget image on screen unlock
 
 ios/QuoteWidget/
 └── QuoteWidget.swift                  # iOS WidgetKit extension
